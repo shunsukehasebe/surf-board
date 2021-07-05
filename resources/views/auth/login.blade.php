@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="text-center">
-        <h1>Log in</h1>
+        <h1>ログイン</h1>
     </div>
 
     <div class="row">
@@ -23,7 +23,7 @@
             {!! Form::close() !!}
 
             {{-- ユーザ登録ページへのリンク --}}
-            <p class="mt-2">アカウントをお持ちでない方 {!! link_to_route('signup.get', 'Sign up now!') !!}</p>
+            <p class="mt-2"> {!! link_to_route('signup.get', 'アカウントをお持ちでない方') !!}</p>
         </div>
     </div>
 @endsection
