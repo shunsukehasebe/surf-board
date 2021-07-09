@@ -11,6 +11,11 @@
 |
 */
 
+// //トップ画面
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 // 認証
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
@@ -19,13 +24,22 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
 Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
 
-//トップ画面
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['auth']], function (){
+    //ポイントのコントローラ
+    Route::resource('points' , 'PointsController', ['only' => ['index','show']]);
+    //Route::get('/points/{$point}' , 'PointsController@show')->('points.show');
+    
+    Route::resource('messages' , 'MessagesController');
+    
+    Route::get('/messages/{point}/create' ,  'MessagesController@createPointMessage')->name('messages.get');
+    Route::post('/messages/{point}/create' , 'MessagesController@createMessage')->name('messages.post');
+    
+    
+    // トップページ[ログイン後]　認証機能追加しないとダメ;
+    Route::get('/','PointsController@index');
+
+    
 });
 
-//ログイン機能できたら
-// Route::get('/','PointsController@index');
 
-// Route::resource('points' , 'PointsController');
 

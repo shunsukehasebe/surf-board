@@ -13,4 +13,9 @@ class Point extends Model
     {
         return $this->hasMany(Message::class);
     }
+    
+    public function loadRelationshipCounts()
+    {
+        $this->loadCount('messages');
+    }
 }

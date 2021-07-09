@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Point; //追加
+
 class PointsController extends Controller
 {
     /**
@@ -13,7 +15,13 @@ class PointsController extends Controller
      */
     public function index()
     {
-        //
+        //ポイント一覧取得
+        $points = Point::all();
+        
+        //ポイント一覧ビューでそれを表示
+        return view('points.index',[
+            'points' => $points,
+        ]);
     }
 
     /**
@@ -45,7 +53,16 @@ class PointsController extends Controller
      */
     public function show($id)
     {
-        //
+        $point = Point::findOrFail($id);
+        
+        $point->loadRelationshipCounts();
+        
+        $messages = $point->messages()->orderBy('created_at','desc')->paginate(10);
+        
+        return view('points.show' ,[
+            'point' => $point,
+            'messages' => $messages,
+        ]);
     }
 
     /**

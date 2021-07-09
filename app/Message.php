@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     protected $fillable = [
-        'title' , 'content' ,
+        'point_id' , 'title' , 'content' ,
     ];
     
     //この投稿を所有するユーザ
