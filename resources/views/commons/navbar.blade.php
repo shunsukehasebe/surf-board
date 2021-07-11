@@ -14,8 +14,8 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            {{-- メッセージ作成ページへのリンク --}}
-                            <li class="dropdown-item">{!! link_to_route('messages.create','新規メッセージの投稿',[],['class' => 'nav-link']) !!}</li>
+                            <!--{{-- メッセージ作成ページへのリンク --}}-->
+                            <!--<li class="dropdown-item">{!! link_to_route('messages.create','新規メッセージの投稿',[],['class' => 'nav-link']) !!}</li>-->
                             {{-- ログアウトへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('logout.get','Logout') !!}</li>
                         </ul>

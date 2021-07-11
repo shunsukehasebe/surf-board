@@ -27,15 +27,16 @@ Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
 Route::group(['middleware' => ['auth']], function (){
     //ポイントのコントローラ
     Route::resource('points' , 'PointsController', ['only' => ['index','show']]);
-    //Route::get('/points/{$point}' , 'PointsController@show')->('points.show');
     
+    //メッセージのコントローラ
     Route::resource('messages' , 'MessagesController');
     
+    //messagecreatepointのルーティング
     Route::get('/messages/{point}/create' ,  'MessagesController@createPointMessage')->name('messages.get');
     Route::post('/messages/{point}/create' , 'MessagesController@createMessage')->name('messages.post');
     
     
-    // トップページ[ログイン後]　認証機能追加しないとダメ;
+   
     Route::get('/','PointsController@index');
 
     

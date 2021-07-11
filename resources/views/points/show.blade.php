@@ -18,7 +18,18 @@
                 <tr>
                     <td>{{ $message->id }}</td>
                     <td>{{ $message->title }}</td>
-                    <td>{{ $message->content }}<br>{!! link_to_route('messages.edit', 'このメッセージを編集', ['message' => $message->id], ['class' => 'btn btn-primary']) !!}</td>
+                    <td>{{ $message->content }}<br>
+                    
+                     @if (Auth::id() == $message->user_id)
+                            {{-- メッセージ編集ボタンのフォーム --}}
+                            {!! link_to_route('messages.edit', 'このメッセージを編集', ['message' => $message->id], ['class' => 'btn btn-primary']) !!}
+                            {{-- 投稿削除ボタンのフォーム --}}
+                            {!! Form::open(['route' => ['messages.destroy',$message->id],'method' => 'delete']) !!}
+                                {!! Form::submit('削除', ['class' => 'btn btn-danger btn-sm']) !!}
+                            {!! Form::close() !!}
+                        @endif
+                    
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
